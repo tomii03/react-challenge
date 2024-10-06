@@ -1,0 +1,14 @@
+.Button {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-radius: 4px;
+  background: blue;
+  width: fit-content;
+  margin: auto;
+  color: white;
+  padding: 8px 10px;
+}
+
+.Button:hover {
+  filter: grayscale(0.5);
+}
