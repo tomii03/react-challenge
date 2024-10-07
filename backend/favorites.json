@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1728317673162,
+    "pokemon_name": "bulbasaur",
+    "pokemon_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+  },
+  {
+    "id": 1728317675338,
+    "pokemon_name": "ivysaur",
+    "pokemon_url": "/static/media/Pokeball.101e1711c308eb37bdd8.png"
+  },
+  {
+    "id": 1728317676546,
+    "pokemon_name": "venusaur",
+    "pokemon_url": "/static/media/Pokeball.101e1711c308eb37bdd8.png"
+  },
+  {
+    "id": 1728317838569,
+    "pokemon_name": "charmander",
+    "pokemon_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+  },
+  {
+    "id": 1728318122224,
+    "pokemon_name": "charmeleon",
+    "pokemon_url": "/static/media/Pokeball.101e1711c308eb37bdd8.png"
+  },
+  {
+    "id": 1728318394132,
+    "pokemon_name": "charizard",
+    "pokemon_url": "/static/media/Pokeball.101e1711c308eb37bdd8.png"
+  },
+  {
+    "id": 1728318945703,
+    "pokemon_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+  },
+  {
+    "id": 1728319428154,
+    "pokemon_name": "squirtle",
+    "pokemon_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"
+  }
+]

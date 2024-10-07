@@ -1,9 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import PokemonCard from "../components/PokeCard";
 
 const FavoriteList = () => {
-  const favorites = useSelector((state) => state.favorites.favorites);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/favorites");
+        setFavorites(response.data);
+      } catch (err) {
+        console.error("Error fetching favorites:", err);
+      }
+    };
+    fetchFavorites();
+  }, []);
 
   return (
     <>
