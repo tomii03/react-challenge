@@ -1,4 +1,4 @@
-import './../styles/button.css';
+import './../styles/button.scss';
 
 export const Button = ({ onClick, children }) => {
   return (

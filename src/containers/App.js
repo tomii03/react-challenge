@@ -1,18 +1,19 @@
-import { Button } from './../components/Button';
-import './../styles/app.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "../pages/Home";
+import PokemonList from "../pages/pokemonList/PokemonList";
+import FavoriteList from "../pages/FavoriteList";
 
-function App() {
+const App = () => {
   return (
-    <div className="App d-flex">
-      <div className="container">
-        <div className="row min-vh-100">
-          <div className="col-6 m-auto">
-            <Button onClick={() => alert("ACA")}> Cargar Información </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/PokeList" element={<PokemonList />} />
+        <Route path="/FavoriteList" element={<FavoriteList />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
