@@ -9,10 +9,19 @@ export const fetchPokemon = () => {
       const response = await axios.get(
         "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
       );
-      dispatch({
-        type: "FETCH_POKEMON_SUCCESS",
-        payload: response.data.results,
-      });
+
+      // Agregamos un 'id' a cada Pokémon basado en su URL
+      const pokemonWithId = response.data.results.map((pokemon, index) => ({
+        ...pokemon,
+        id: index + 1, // O puedes extraer el ID de la URL
+      }));
+
+       setTimeout(() => {
+         dispatch({
+           type: "FETCH_POKEMON_SUCCESS",
+           payload: pokemonWithId,
+         });
+       }, 1000);
     } catch (error) {
       dispatch({
         type: "FETCH_POKEMON_FAILURE",

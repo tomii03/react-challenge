@@ -6,7 +6,7 @@ import "../styles/pokeCard.scss";
 import { pokemonData } from "./PokemonDataExtra";
 
 const PokemonCard = ({ pokemon = {} }) => {
-  const pokemonName = pokemon.name || pokemon.pokemon_name; 
+  const pokemonName = pokemon.name || pokemon.pokemon_name;
 
   const customData = pokemonData[pokemonName] || {
     image: Pokeball,
@@ -29,16 +29,17 @@ const PokemonCard = ({ pokemon = {} }) => {
     };
 
     checkIfFavorite();
-  }, [pokemonName]); // Cambiar dependencia a pokemonName
+  }, [pokemonName]); 
+
 
   const addFavorite = async () => {
     try {
       await axios.post("http://localhost:5000/favorites", {
+        id: pokemon.id,
         pokemon_name: pokemonName,
         pokemon_url: customData.image,
       });
       setIsFavorite(true);
-      alert("¡Pokémon añadido a favoritos!");
     } catch (err) {
       console.error("Error al agregar a favoritos:", err);
     }
@@ -46,36 +47,56 @@ const PokemonCard = ({ pokemon = {} }) => {
 
   const removeFavorite = async () => {
     try {
-      if (!pokemonName) {
-        console.error("No se puede eliminar, el nombre del Pokémon es inválido");
+      if (!pokemon.id) {
+        console.error(
+          "No se puede eliminar, el nombre del Pokémon es inválido"
+        );
         return;
       }
-      await axios.delete(`http://localhost:5000/favorites/${pokemonName}`);
+      await axios.delete(
+        `http://localhost:5000/favorites/delete/${pokemon.id}`
+      );
       setIsFavorite(false);
-      alert("Pokémon eliminado de favoritos.");
     } catch (err) {
-      console.error("Error al eliminar de favoritos:", err.response ? err.response.data : err.message);
+      console.error(
+        "Error al eliminar de favoritos:",
+        err.response ? err.response.data : err.message
+      );
     }
   };
 
-  const handleFavoriteToggle = () => {
+  const handleFavoriteToggle = async () => {
     if (isFavorite) {
-      removeFavorite();
+      try {
+        await removeFavorite();
+        setIsFavorite(false);
+      } catch (err) {
+        console.error("Error removing favorite:", err);
+      }
     } else {
-      addFavorite();
+      try {
+        await addFavorite();
+        setIsFavorite(true); 
+      } catch (err) {
+        console.error("Error adding favorite:", err);
+      }
     }
   };
 
-
+  
   return (
     <article>
-      <img className="nes-container" src={customData.image } alt={pokemon.name} />
+      <img
+        className="nes-container"
+        src={customData.image}
+        alt={pokemon.name}
+      />
       <div>
         <p>{pokemon.name || pokemon.pokemon_name}</p>
         <p>{customData.description}</p>
       </div>
       <button
-        className={`btns-card ${isFavorite ? "favorite" : ""}`} 
+        className={`btns-card ${isFavorite ? "favorite" : ""}`}
         onClick={handleFavoriteToggle}
       >
         <img src={Favoritos} alt="Favoritos" className="favorite-icon" />

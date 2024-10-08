@@ -27,7 +27,15 @@ const PokemonList = () => {
 
   return (
     <>
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className="loading-container">
+          <img
+            src={require("../../images/Loading.png")}
+            alt="Loading..."
+            className="loading-spinner"
+          />
+        </div>
+      )}
       {error && <p>Error: {error}</p>}
       <nav>
         <input
