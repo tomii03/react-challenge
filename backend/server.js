@@ -70,6 +70,8 @@ app.delete("/favorites/delete/:id", (req, res) => {
         message: `Pokémon con ID ${id} no encontrado en favoritos`,
       });
     }
+    
+    //Una vez encontrado el ID, hace una splice de la lista y graba nuevamente la lista sin el elemento a eliminar
 
     favorites.splice(favoriteIndex, 1);
 
