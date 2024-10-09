@@ -33,7 +33,10 @@ const PokemonCard = ({ pokemon = {} }) => {
           alt={pokemon.name}
         />
         <div>
-          <p>{pokemon.name || pokemon.pokemon_name}</p>
+          <p>
+            {(pokemon.name || pokemon.pokemon_name).charAt(0).toUpperCase() +
+              (pokemon.name || pokemon.pokemon_name).slice(1)}
+          </p>
           <p>{customData.description}</p>
         </div>
         <button className={"btn-detail"} onClick={handleOpenCard}>

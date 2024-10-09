@@ -34,7 +34,7 @@ app.post("/favorites", (req, res) => {
       return res.status(500).json({ message: "Error al leer el archivo" });
     }
     const favorites = JSON.parse(data);
-
+    // Despues de parsear la data, agrega un nuevo objeto a la lista y reescribe el archivo
     const newFavorite = { id , pokemon_name, pokemon_url };
     favorites.push(newFavorite);
 
@@ -60,7 +60,7 @@ app.delete("/favorites/delete/:id", (req, res) => {
     }
 
     const favorites = JSON.parse(data);
-
+    //Busca que en la lista este el ID que le pase 
     const favoriteIndex = favorites.findIndex(
       (fav) => fav.id && fav.id === Number(id)
     );
