@@ -3,7 +3,7 @@ import axios from "axios";
 import PokemonCard from "../components/PokeCard/PokeCard";
 import "../styles/pokeList.scss";
 import { useNavigate } from "react-router-dom";
-import favoritosVacioIcon from "../images/pikachuTriste.png";
+import favoritosVacioIcon from "../images/pikachuTriste.png"
 
 const FavoriteList = () => {
   const [favorites, setFavorites] = useState([]);
@@ -11,9 +11,7 @@ const FavoriteList = () => {
 
   const fetchFavorites = async () => {
     try {
-      const response = await axios.get(
-        "https://react-challenge-back.vercel.app/favorites"
-      );
+      const response = await axios.get("http://localhost:5000/favorites");
       setFavorites(response.data);
     } catch (err) {
       console.error("Error fetching favorites:", err);
