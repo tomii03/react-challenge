@@ -13,7 +13,7 @@ export const usePokeCard = (pokemon, pokemonName, customData) => {
     const checkIfFavorite = async () => {
       try {
         const response = await axios.get(
-          "http://react-challenge-ecru-sigma.vercel.app/favorites"
+          "http://react-challenge-back.vercel.app/favorites"
         );
         const favorites = response.data;
 
@@ -31,18 +31,15 @@ export const usePokeCard = (pokemon, pokemonName, customData) => {
 
   const addFavorite = async () => {
     try {
-      await axios.post(
-        "http://react-challenge-ecru-sigma.vercel.app/favorites",
-        {
-          id: pokemon.id,
-          pokemon_name: pokemonName,
-          pokemon_url: customData.image,
-        }
-      );
+      await axios.post("http://react-challenge-back.vercel.app/favorites", {
+        id: pokemon.id,
+        pokemon_name: pokemonName,
+        pokemon_url: customData.image,
+      });
       setIsFavorite(true);
 
       const response = await axios.get(
-        "http://react-challenge-ecru-sigma.vercel.app/favorites"
+        "http://react-challenge-back.vercel.app/favorites"
       );
       dispatch(setFavoriteCount(response.data.length));
     } catch (err) {
@@ -59,12 +56,12 @@ export const usePokeCard = (pokemon, pokemonName, customData) => {
         return;
       }
       await axios.delete(
-        `http://react-challenge-ecru-sigma.vercel.app/favorites/delete/${pokemon.id}`
+        `http://react-challenge-back.vercel.app/favorites/delete/${pokemon.id}`
       );
       setIsFavorite(false);
 
       const response = await axios.get(
-        "https://react-challenge-ecru-sigma.vercel.app/api/favorites"
+        "https://react-challenge-back.vercel.app/favorites"
       );
       dispatch(setFavoriteCount(response.data.length));
     } catch (err) {
