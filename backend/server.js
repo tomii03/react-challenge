@@ -15,6 +15,7 @@ if (!fs.existsSync(favoritesFilePath)) {
   fs.writeFileSync(favoritesFilePath, JSON.stringify([]));
 }
 
+//Generamos metodo get
 app.get("/favorites", (req, res) => {
   fs.readFile(favoritesFilePath, "utf-8", (err, data) => {
     if (err) {
@@ -24,6 +25,7 @@ app.get("/favorites", (req, res) => {
   });
 });
 
+//Generamos metodo post y guardamos name, id y url del pokemon
 app.post("/favorites", (req, res) => {
   const { id, pokemon_name, pokemon_url } = req.body;
 
@@ -47,6 +49,7 @@ app.post("/favorites", (req, res) => {
   });
 });
 
+//Generamos metodo delete buscandolo por ID
 app.delete("/favorites/delete/:id", (req, res) => {
   const { id } = req.params;
   console.log(`Intentando eliminar favorito: ${id}`);

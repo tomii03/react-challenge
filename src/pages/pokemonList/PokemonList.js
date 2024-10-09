@@ -2,7 +2,7 @@ import React from "react";
 import { usePokemonList } from "./usePokemonList";
 import PokemonCard from "../../components/PokeCard/PokeCard";
 import { Button } from "../../components/Button";
-import { useNavigate } from "react-router-dom";
+import favoritosIcon from "../../images/favoriteIMG.png"
 import "../../styles/pokeList.scss";
 
 const PokemonList = () => {
@@ -17,13 +17,9 @@ const PokemonList = () => {
     handleNextPage,
     handlePreviousPage,
     itemsPerPage,
+    favoriteCount,
+    goToFavoriteList,
   } = usePokemonList();
-
-  const navigate = useNavigate();
-
-  const goToFavoriteList = () => {
-    navigate("/FavoriteList");
-  };
 
   return (
     <>
@@ -42,17 +38,19 @@ const PokemonList = () => {
 
       {error && <p>Error: {error}</p>}
       <nav>
-        <input
-          className="nes-input"
-          id="name_field"
-          placeholder="Buscar Pokémon"
-          type="text"
-          value={searchPokemon}
-          onChange={handleSearch}
-        />
-        <Button className="btn-fav" onClick={goToFavoriteList}>
-          Favoritos
-        </Button>
+        
+          <input
+            className="nes-input"
+            id="name_field"
+            placeholder="Buscar Pokémon"
+            type="text"
+            value={searchPokemon}
+            onChange={handleSearch}
+          />
+          <button className="btn-fav" onClick={goToFavoriteList}>
+            {favoriteCount} 
+            <img src={favoritosIcon} alt="Favoritos" className="favorite-icon" /> 
+          </button>
       </nav>
       <section>
         {currentItems.map((pokemon, index) => (

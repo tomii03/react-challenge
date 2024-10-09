@@ -10,10 +10,10 @@ export const fetchPokemon = () => {
         "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
       );
 
-      // Agregamos un 'id' a cada Pokémon basado en su URL
+      // Agregamos un 'id' a cada Pokémon 
       const pokemonWithId = response.data.results.map((pokemon, index) => ({
         ...pokemon,
-        id: index + 1, // O puedes extraer el ID de la URL
+        id: index + 1, 
       }));
 
        setTimeout(() => {

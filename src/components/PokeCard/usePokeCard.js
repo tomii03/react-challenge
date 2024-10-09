@@ -1,9 +1,13 @@
 // src/hooks/usePokemonFavorite.js
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setFavoriteCount } from "../../app/favoriteCountActions"; 
+import { pokemonData } from "../PokemonDataExtra";
 
 export const usePokeCard = (pokemon, pokemonName, customData) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch(); 
 
   useEffect(() => {
     const checkIfFavorite = async () => {
@@ -13,13 +17,16 @@ export const usePokeCard = (pokemon, pokemonName, customData) => {
 
         const found = favorites.some((fav) => fav.pokemon_name === pokemonName);
         setIsFavorite(found);
+
+        
+        dispatch(setFavoriteCount(favorites.length)); 
       } catch (err) {
         console.error("Error al obtener favoritos:", err);
       }
     };
 
     checkIfFavorite();
-  }, [pokemonName]);
+  }, [pokemonName, dispatch]);
 
   const addFavorite = async () => {
     try {
@@ -29,6 +36,9 @@ export const usePokeCard = (pokemon, pokemonName, customData) => {
         pokemon_url: customData.image,
       });
       setIsFavorite(true);
+
+      const response = await axios.get("http://localhost:5000/favorites");
+      dispatch(setFavoriteCount(response.data.length));
     } catch (err) {
       console.error("Error al agregar a favoritos:", err);
     }
@@ -46,6 +56,9 @@ export const usePokeCard = (pokemon, pokemonName, customData) => {
         `http://localhost:5000/favorites/delete/${pokemon.id}`
       );
       setIsFavorite(false);
+
+      const response = await axios.get("http://localhost:5000/favorites");
+      dispatch(setFavoriteCount(response.data.length)); 
     } catch (err) {
       console.error(
         "Error al eliminar de favoritos:",
@@ -62,8 +75,20 @@ export const usePokeCard = (pokemon, pokemonName, customData) => {
     }
   };
 
+ const [isModalOpen, setIsModalOpen] = useState(false);
+ const [selectedPokemon, setSelectedPokemon] = useState(null);
+
+ const handleOpenCard = (pokemon) => {
+   setSelectedPokemon(pokemon);
+   setIsModalOpen(true); 
+ };
+
   return {
     isFavorite,
     handleFavoriteToggle,
+    handleOpenCard,
+    isModalOpen,
+    selectedPokemon,
+    setIsModalOpen
   };
 };

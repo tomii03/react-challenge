@@ -3,8 +3,7 @@ import axios from "axios";
 import PokemonCard from "../components/PokeCard/PokeCard";
 import "../styles/pokeList.scss";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
-
+import favoritosVacioIcon from "../images/pikachuTriste.png"
 
 const FavoriteList = () => {
   const [favorites, setFavorites] = useState([]);
@@ -30,14 +29,23 @@ const FavoriteList = () => {
   return (
     <>
       <nav className="nav-fav">
-        <Button className="btn-back" onClick={handleGoBack}>
+        <button className="btn-back" onClick={handleGoBack}>
           Volver
-        </Button>
+        </button>
         <div className="title-fav">Favoritos</div>
       </nav>
 
       <section>
-        {favorites.length === 0 && <p>No hay favoritos</p>}
+        {favorites.length === 0 && (
+          <div className="div-FavoritesEmpty">
+            <p>No hay favoritos</p>
+            <img
+              src={favoritosVacioIcon}
+              alt="Favoritos Vacio"
+              className="FavoritesEmptyIMG"
+            />
+          </div>
+        )}
         {favorites.map((pokemon, index) => (
           <PokemonCard
             key={index}

@@ -36,6 +36,10 @@ section {
       height: auto;
       border-radius: 50%;
       margin-right: 15px;
+
+      @media (max-width: 430px) {
+        margin: 0px;
+      }
     }
 
     div {
@@ -44,26 +48,13 @@ section {
       flex-direction: column;
       text-align: left;
 
-      @media (max-width: 430px) {
+      @media (max-width: 610px) {
         display: none;
       }
 
       p {
         margin: 5px 0;
         color: $text-color;
-      }
-    }
-
-    button {
-      background-color: $secondary-color;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: darken($secondary-color, 10%);
       }
     }
 
@@ -83,6 +74,9 @@ section {
 
       img {
         margin-right: 5px;
+        @media (max-width: 400px) {
+          margin: 0px;
+        }
       }
 
       &:hover {
@@ -93,6 +87,19 @@ section {
         background-color: red;
       }
     }
-
   }
+}
+
+.btn-detail {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  @media (max-width: 400px) {
+    margin: -5%;
+  }
+}
+
+.card-icon {
+  width: 40px;
+  
 }

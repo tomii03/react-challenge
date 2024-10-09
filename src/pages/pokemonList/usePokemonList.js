@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchPokemon } from "../../app/pokemonActions";
 
 export const usePokemonList = () => {
@@ -23,6 +24,7 @@ export const usePokemonList = () => {
     pokemon.name.toLowerCase().includes(searchPokemon)
   );
 
+  //Paginacion que filtra la lista en base a los items por pagina que indiquemos
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredList.slice(indexOfFirstItem, indexOfLastItem);
@@ -41,6 +43,15 @@ export const usePokemonList = () => {
     }
   };
 
+  
+  const favoriteCount = useSelector((state) => state.favoriteCount.count);
+  const navigate = useNavigate();
+
+  const goToFavoriteList = () => {
+    navigate("/FavoriteList");
+  };
+
+
   return {
     searchPokemon,
     handleSearch,
@@ -52,5 +63,7 @@ export const usePokemonList = () => {
     handleNextPage,
     handlePreviousPage,
     itemsPerPage,
+    favoriteCount,
+    goToFavoriteList,
   };
 };
