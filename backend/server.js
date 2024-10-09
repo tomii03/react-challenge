@@ -16,7 +16,7 @@ if (!fs.existsSync(favoritesFilePath)) {
 }
 
 //Generamos metodo get
-app.get("/favorites", (req, res) => {
+app.get("/api/favorites", (req, res) => {
   fs.readFile(favoritesFilePath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).json({ message: "Error al leer el archivo" });
@@ -26,7 +26,7 @@ app.get("/favorites", (req, res) => {
 });
 
 //Generamos metodo post y guardamos name, id y url del pokemon
-app.post("/favorites", (req, res) => {
+app.post("/api/favorites", (req, res) => {
   const { id, pokemon_name, pokemon_url } = req.body;
 
   fs.readFile(favoritesFilePath, "utf-8", (err, data) => {
@@ -35,7 +35,7 @@ app.post("/favorites", (req, res) => {
     }
     const favorites = JSON.parse(data);
 
-    const newFavorite = { id , pokemon_name, pokemon_url };
+    const newFavorite = { id, pokemon_name, pokemon_url };
     favorites.push(newFavorite);
 
     fs.writeFile(favoritesFilePath, JSON.stringify(favorites), (err) => {
@@ -50,7 +50,7 @@ app.post("/favorites", (req, res) => {
 });
 
 //Generamos metodo delete buscandolo por ID
-app.delete("/favorites/delete/:id", (req, res) => {
+app.delete("/api/favorites/delete/:id", (req, res) => {
   const { id } = req.params;
   console.log(`Intentando eliminar favorito: ${id}`);
 
@@ -70,7 +70,7 @@ app.delete("/favorites/delete/:id", (req, res) => {
         message: `Pokémon con ID ${id} no encontrado en favoritos`,
       });
     }
-    
+
     //Una vez encontrado el ID, hace una splice de la lista y graba nuevamente la lista sin el elemento a eliminar
 
     favorites.splice(favoriteIndex, 1);
