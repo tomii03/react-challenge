@@ -1,6 +1,8 @@
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
-import logoPokedex from "../images/LogoPokeDex.png"
+import logoPokedex from "../images/LogoPokeDex.png";
+import gifPokeball from "../images/pokeball.gif"; 
+import gifCharmander from "../images/charmander.gif"; 
 import "../styles/home.scss";
 
 function Home() {
@@ -16,7 +18,13 @@ function Home() {
         <img src={logoPokedex} alt="Pokédex Logo" className="pokedex-logo" />
       </div>
       <div className="button-container">
-        <Button onClick={goToPokeList}> Cargar Pokemons </Button>
+        <button className="button-85" onClick={goToPokeList}>
+          Cargar Pokemons
+        </button>
+      </div>
+      <div className="gifs-container">
+        <img src={gifPokeball} alt="GIF 1" className="gif1" />
+        <img src={gifCharmander} alt="GIF 2" className="gif2" />
       </div>
     </div>
   );

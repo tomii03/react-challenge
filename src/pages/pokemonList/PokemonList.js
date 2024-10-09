@@ -1,6 +1,6 @@
 import React from "react";
 import { usePokemonList } from "./usePokemonList";
-import PokemonCard from "../../components/PokeCard";
+import PokemonCard from "../../components/PokeCard/PokeCard";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import "../../styles/pokeList.scss";
@@ -29,13 +29,17 @@ const PokemonList = () => {
     <>
       {loading && (
         <div className="loading-container">
-          <img
-            src={require("../../images/Loading.png")}
-            alt="Loading..."
-            className="loading-spinner"
-          />
+          <div className="loading-content">
+            <img
+              src={require("../../images/running-pikachu.gif")}
+              alt="Loading..."
+              className="loading-spinner"
+            />
+            <p className="loading-text">Cargando...</p>
+          </div>
         </div>
       )}
+
       {error && <p>Error: {error}</p>}
       <nav>
         <input

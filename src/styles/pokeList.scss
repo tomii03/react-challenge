@@ -8,7 +8,7 @@ $box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 body {
   background-color: $background-color;
   color: $text-color;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 nav {
@@ -17,7 +17,6 @@ nav {
   padding: 20px 0;
   display: flex;
   justify-content: center;
-  
 
   .nes-input {
     padding: 10px;
@@ -64,7 +63,6 @@ section {
 
     img {
       max-width: 100px;
-      
     }
 
     p {
@@ -132,7 +130,7 @@ section {
     font-size: 16px;
   }
 }
-.nav-fav{
+.nav-fav {
   font-size: 150%;
 }
 
@@ -140,20 +138,39 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; // Full height of the viewport
+  height: 100vh;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .loading-spinner {
-  width: 100px;
+  width: 150px;
   height: 100px;
-  animation: spin 2s linear infinite;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.loading-text {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+//FAVORITE LIST
+
+.nav-fav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.title-fav {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #000000;
+  margin-left: -7%;
 }

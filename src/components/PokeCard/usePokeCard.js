@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from "react";
+// src/hooks/usePokemonFavorite.js
+import { useState, useEffect } from "react";
 import axios from "axios";
-import Pokeball from "../images/Pokeball.png";
-import Favoritos from "../images/LogoFavoritos.png";
-import "../styles/pokeCard.scss";
-import { pokemonData } from "./PokemonDataExtra";
 
-const PokemonCard = ({ pokemon = {} }) => {
-  const pokemonName = pokemon.name || pokemon.pokemon_name;
-
-  const customData = pokemonData[pokemonName] || {
-    image: Pokeball,
-    description: "Descripción aleatoria.",
-  };
-
+export const usePokeCard = (pokemon, pokemonName, customData) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -29,8 +19,7 @@ const PokemonCard = ({ pokemon = {} }) => {
     };
 
     checkIfFavorite();
-  }, [pokemonName]); 
-
+  }, [pokemonName]);
 
   const addFavorite = async () => {
     try {
@@ -67,42 +56,14 @@ const PokemonCard = ({ pokemon = {} }) => {
 
   const handleFavoriteToggle = async () => {
     if (isFavorite) {
-      try {
-        await removeFavorite();
-        setIsFavorite(false);
-      } catch (err) {
-        console.error("Error removing favorite:", err);
-      }
+      await removeFavorite();
     } else {
-      try {
-        await addFavorite();
-        setIsFavorite(true); 
-      } catch (err) {
-        console.error("Error adding favorite:", err);
-      }
+      await addFavorite();
     }
   };
 
-  
-  return (
-    <article>
-      <img
-        className="nes-container"
-        src={customData.image}
-        alt={pokemon.name}
-      />
-      <div>
-        <p>{pokemon.name || pokemon.pokemon_name}</p>
-        <p>{customData.description}</p>
-      </div>
-      <button
-        className={`btns-card ${isFavorite ? "favorite" : ""}`}
-        onClick={handleFavoriteToggle}
-      >
-        <img src={Favoritos} alt="Favoritos" className="favorite-icon" />
-      </button>
-    </article>
-  );
+  return {
+    isFavorite,
+    handleFavoriteToggle,
+  };
 };
-
-export default PokemonCard;

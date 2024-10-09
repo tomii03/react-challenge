@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import PokemonCard from "../components/PokeCard";
+import PokemonCard from "../components/PokeCard/PokeCard";
 import "../styles/pokeList.scss";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../components/Button";
+
 
 const FavoriteList = () => {
   const [favorites, setFavorites] = useState([]);
+  const navigate = useNavigate();
 
   const fetchFavorites = async () => {
     try {
@@ -15,13 +19,22 @@ const FavoriteList = () => {
     }
   };
 
+  const handleGoBack = () => {
+    navigate("/PokeList");
+  };
+
   useEffect(() => {
-    fetchFavorites(); 
+    fetchFavorites();
   }, [favorites]);
 
   return (
     <>
-      <nav className="nav-fav">Favoritos</nav>
+      <nav className="nav-fav">
+        <Button className="btn-back" onClick={handleGoBack}>
+          Volver
+        </Button>
+        <div className="title-fav">Favoritos</div>
+      </nav>
 
       <section>
         {favorites.length === 0 && <p>No hay favoritos</p>}
@@ -29,7 +42,7 @@ const FavoriteList = () => {
           <PokemonCard
             key={index}
             pokemon={pokemon}
-            onUpdateFavorites={fetchFavorites} // Pasar la función como prop
+            onUpdateFavorites={fetchFavorites}
           />
         ))}
       </section>
