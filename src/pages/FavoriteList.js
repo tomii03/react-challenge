@@ -12,7 +12,7 @@ const FavoriteList = () => {
   const fetchFavorites = async () => {
     try {
       const response = await axios.get(
-        "http://react-challenge-ecru-sigma.vercel.app/favorites"
+        "https://react-challenge-ecru-sigma.vercel.app/api/favorites"
       );
       setFavorites(response.data);
     } catch (err) {
